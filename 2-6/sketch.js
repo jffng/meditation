@@ -26,13 +26,13 @@ $(document).ready(function(){
 				case 'positive':
 					var r = 10;
 					var g = Math.round(parseFloat(data.docSentiment.score) * 255);
-					var b = 10;
+					var b = 20;
 					$('body').css({background: 'rgba('+r+','+g+','+b+',.2)'});
 					break;
 				case 'negative':
 					var g = 10;
 					var r = Math.round(parseFloat(-data.docSentiment.score) * 255);
-					var b = 10;
+					var b = 20;
 					$('body').css({background: 'rgba('+r+','+g+','+b+',.2)'});
 					break;				
 				default:
