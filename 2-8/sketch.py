@@ -1,13 +1,40 @@
 import unirest
 
 # These code snippets use an open-source library. http://unirest.io/python
-response = unirest.get("https://alchemy.p.mashape.com/url/URLGetRankedConcepts?baseUrl=<required>&linkedData=false&outputMode=json&url=http%3A%2F%2Fwww.cnn.com%2F2011%2F09%2F28%2Fus%2Fmassachusetts-pentagon-plot-arrest%2Findex.html%3Fhpt%3Dhp_t1",
+response = unirest.get("http://access.alchemyapi.com/calls/url/URLGetRankedConcepts",
 	headers={
-		"X-Mashape-Key": "z89uguZztpmshQ2wwkurM9CDca1tp1qVMT4jsn4uyYJZkVcTNZ",
 		"Accept": "text/plain"
+	},
+	params={
+		'url': 'http%3A%2F%2Fthenewinquiry.com%2Fessays%2Fthe-anxieties-of-big-data%2F',
+		'apikey': 'e553639093ab39a2908def2de1cfc565d6583ae8',
+		'maxRetrieve': 20,
+		# 'showSourceText': 1,
+		'outputMode': 'json'
 	}
 )
 
-for c in response.body['concepts']:
-	print c['text']
+# print response.body['text']
 
+concept_sentiment = {}
+
+for c in response.body['concepts']:
+	sentiment = unirest.get("http://access.alchemyapi.com/calls/text/TextGetTextSentiment",
+		headers={
+			"Accept": "text/plain"
+		},
+		params={
+			'apikey': 'e553639093ab39a2908def2de1cfc565d6583ae8',
+			'text': c['text'],
+			'outputMode': 'json'
+		}
+	)
+
+	try:
+		print c['text'] + ': ' + sentiment.body['docSentiment']['score']
+		concept_sentiment[c['text']] = sentiment.body['docSentiment']['score']
+	except KeyError:
+		print c['text'] + ': Neutral'	
+	
+
+print concept_sentiment
