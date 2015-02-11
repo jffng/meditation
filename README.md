@@ -8,3 +8,5 @@ Uses speech recognition and determines the sentiment of what was said. Changes c
 ##### 2-8
 Feed an article to AlchemyAPI, tags the concepts in the articles, returns the positivity / negativity scores associated with the non-neutral concepts. Tells you whether or not the article will make you happy. 
 
+##### 2-11
+Takes a user's instagram image, tags it via Alchemy, rates the sentiment of each tag.
