@@ -3,6 +3,7 @@ import json
 import oauth2 as oauth
 import urllib
 import urlparse
+import unirest
 
 creds = json.load(open('../configuration.json'))
 access_token_url = 'https://www.instapaper.com/api/1/oauth/access_token'
@@ -24,8 +25,88 @@ token = oauth.Token(request_token['oauth_token'], request_token['oauth_token_sec
 http = oauth.Client(consumer, token)
 
 response, data = http.request('https://www.instapaper.com/api/1/bookmarks/list', method='POST', body=urllib.urlencode({
-    # 'folder_id': 'starred',
-    'limit': '100'
+    'limit': '10'
 })) 
 
-print json.dumps(data)
+bookmark = json.loads(data)
+
+bookmarks = []
+
+# url = bookmark[2]['url']
+
+# response, data = http.request('https://www.instapaper.com/api/1/bookmarks/get_text', method='POST', body=urllib.urlencode({
+#     'bookmark_id': bookmark[2]['bookmark_id']
+# })) 
+
+# print data
+
+
+def get_concepts(url):
+	encoded_url = urllib.quote(url, '')
+
+	response = unirest.get("http://access.alchemyapi.com/calls/url/URLGetRankedConcepts",
+		headers={
+			"Accept": "text/plain"
+		},
+		params={
+			'url': encoded_url,
+			'apikey': creds['alchemy_key'],
+			'maxRetrieve': 20,
+			'outputMode': 'json'
+		}
+	)
+
+	cs = []
+
+	for c in response.body['concepts']:
+		cs.append(c['text'])
+
+	return cs
+
+def get_sentiment(phrase):
+	sentiment = unirest.get("http://access.alchemyapi.com/calls/text/TextGetTextSentiment",
+				headers={
+					"Accept": "text/plain"
+				},
+				params={
+					'apikey': creds['alchemy_key'],
+					'text': phrase,
+					'outputMode': 'json'
+				}
+			)
+
+	try:
+		print phrase + ": " + sentiment.body['docSentiment']['score']
+		return float(sentiment.body['docSentiment']['score'])
+	except KeyError:
+		print phrase + ": neutral"
+		return 0	
+
+all_concepts = []
+cs_list = []
+
+for b in bookmark[2:]:
+	cs_list = get_concepts(b['url'])
+	for i in cs_list:
+		all_concepts.append(i)
+
+sentiment=0
+
+for c in all_concepts:
+	sentiment+=get_sentiment(c)
+
+sentiment=sentiment/len(all_concepts)
+
+print sentiment
+
+
+
+
+
+
+
+
+
+
+
+
