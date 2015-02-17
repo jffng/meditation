@@ -10,3 +10,6 @@ Feed an article to AlchemyAPI, tags the concepts in the articles, returns the po
 
 ##### 2-11
 Takes a user's instagram image, tags it via Alchemy, rates the sentiment of each tag.
+
+##### 2-16
+Takes articles I've read, finds the concepts, rates them, sums
