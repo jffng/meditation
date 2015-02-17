@@ -12,4 +12,4 @@ Feed an article to AlchemyAPI, tags the concepts in the articles, returns the po
 Takes a user's instagram image, tags it via Alchemy, rates the sentiment of each tag.
 
 ##### 2-16
-Takes articles I've read, finds the concepts, rates them, sums
+Feeds articles I've read via Instapaper to Alchemy API; Alchemy tags the concepts + rates their sentiment; the sketch returns an average of my positivity / negativity
