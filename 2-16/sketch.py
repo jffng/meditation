@@ -25,7 +25,7 @@ token = oauth.Token(request_token['oauth_token'], request_token['oauth_token_sec
 http = oauth.Client(consumer, token)
 
 response, data = http.request('https://www.instapaper.com/api/1/bookmarks/list', method='POST', body=urllib.urlencode({
-    'limit': '10'
+    'limit': '20'
 })) 
 
 bookmark = json.loads(data)
@@ -97,15 +97,7 @@ for c in all_concepts:
 
 sentiment=sentiment/len(all_concepts)
 
-print sentiment
-
-
-
-
-
-
-
-
+print "How Jeff feels: " , sentiment
 
 
 

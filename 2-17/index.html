@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+	#buttondiv{
+		margin-left: auto;
+		margin-right: auto;
+		width: 70%;
+	}
+	button {
+		/*margin-left: auto;
+		margin-right: auto;*/
+		margin: 0 auto;
+		width: 5%;
+	}
+	</style>
+	<script type="text/javascript" src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+</head>
+<body>
+<div>
+	<div id="buttondiv">
+		<button id="go">Go</button>	
+	</div>
+</div>
+<script type="text/javascript">
+	document.getElementById("go").addEventListener("click", function (argument) {
+		$.ajax({
+			url: '/submit',
+			type: 'GET',
+			dataType: 'json'
+		})
+		.done(function(d) {
+			console.log(d);
+			console.log("success");
+		})
+		.fail(function() {
+			console.log("error");
+		})
+		.always(function() {
+			console.log("complete");
+		});
+	});
+
+</script>
+</body>
+</html>
