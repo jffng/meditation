@@ -13,3 +13,6 @@ Takes a user's instagram image, tags it via Alchemy, rates the sentiment of each
 
 ##### 2-16
 Feeds articles I've read via Instapaper to Alchemy API; Alchemy tags the concepts + rates their sentiment; the sketch returns an average of my positivity / negativity
+
+##### 2-17
+Feeds my Instagram images into image tagger, searches Flickr api for images with those tags, and replaces on mouse rollover.
