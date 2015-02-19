@@ -3,6 +3,7 @@ import unirest
 import urllib
 import flickrapi
 import json
+import random
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -30,7 +31,7 @@ def get_ig_media(uid):
 		},
 		params={
 			'access_token': creds['ig_token'],
-			'count': 5
+			'count': 20
 		})
 
 	return user_response.body['data']
@@ -44,7 +45,7 @@ def get_img_tags(img_url):
 		params={
 			'url': img_url,
 			'forceShowAll': 1,
-			'apikey': creds['alchemy_key'],
+			'apikey': creds['alchemy_key_2'],
 			'outputMode': 'json'
 		}
 	)
@@ -58,12 +59,12 @@ def search_flickr(ig_tags):
 
 	photos = flickr.photos.search(tags=ig_tags, per_page='10')
 	parsed = json.loads(photos.decode('utf-8'))
-	photo = parsed['photos']['photo'][0]
+	photo = parsed['photos']['photo'][random.randint(0,9)]
 	# https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
 
 	url = 'https://farm'+str(photo['farm'])+'.staticflickr.com/'+str(photo['server'])+'/'+str(photo['id'])+'_'+str(photo['secret'])+'.jpg'
 
-	# print url
+	print url
 	return url
 
 @app.route("/")
@@ -91,11 +92,13 @@ def submit():
 			for t in tags:
 				tagset += str(t['text']) + ','
 			flickr_url = search_flickr(tagset)			
-			ig_flickr.append(str(ig_url))
+			ig_flickr.append(str(flickr_url))
+			ig_flickr.append(tagset[:-1])
 			image_list.append(ig_flickr)
 
 		else:
 			ig_flickr.append(str(ig_url))
+			ig_flickr.append('----')
 			image_list.append(ig_flickr)
 
 	print image_list
