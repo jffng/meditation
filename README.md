@@ -16,3 +16,6 @@ Feeds articles I've read via Instapaper to Alchemy API; Alchemy tags the concept
 
 ##### 2-17
 Feeds my Instagram images into image tagger, searches Flickr api for images with those tags, and replaces on mouse rollover.
+
+##### 2-18
+Same as 2-16, but uses Prismatic's Interest Graph API.
