@@ -19,3 +19,9 @@ Feeds my Instagram images into image tagger, searches Flickr api for images with
 
 ##### 2-18
 Same as 2-16, but uses Prismatic's Interest Graph API.
+
+##### 2-19
+An attempt to grab my Instagram images and tag using a pre-trained Deep Learning network. 
+
+##### 2-20
+Beginning of a generative, daily audio-biography / snapshot / "portrait"
