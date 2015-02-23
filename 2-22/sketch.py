@@ -4,6 +4,7 @@ from subprocess import Popen, PIPE
 import os
 from nltk.stem.wordnet import WordNetLemmatizer
 import unirest
+import random
 
 f = open('../ccv/samples/image-net-2012.words')
 
@@ -16,6 +17,24 @@ for line in temp:
 	words_list.append(line)
 
 f.close()
+
+def concept_tag(tag):
+	uri = 'http://conceptnet5.media.mit.edu/data/5.3/c/en/' + tag
+
+	limit = 10
+
+	response = unirest.get(uri, 
+			headers= {
+				"Accept": "text/plain"
+			},
+			params={
+				'limit': limit
+			})
+
+	edges = response.body['edges']
+
+	if edges:
+		print edges[random.randint(0,len(edges)-1)]['surfaceText']
 
 def learn_deep(args):
 	p = subprocess.Popen(args, stdout=PIPE, shell=True)
@@ -44,11 +63,13 @@ for i in os.listdir('ig'):
 
 		for t in tags:
 			if len(t) > 0:
-				lm = lmtzr.lemmatize(t[0])
-				all_tags.append(lm)
-		print all_tags
+				lm = lmtzr.lemmatize(t[0],'v')
+				all_tags.append(str(lm))
+		# print all_tags
 		continue
 	else:
 		continue
 
 for tag in all_tags:
+	concept_tag(tag)
+
