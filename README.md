@@ -25,3 +25,9 @@ An attempt to grab my Instagram images and tag using a pre-trained Deep Learning
 
 ##### 2-20
 Beginning of a generative, daily audio-biography / snapshot / "portrait"
+
+##### 2-22
+Uses a convolutional neural network (libccv) to tag instagram images and generate related concepts
+
+##### 2-23
+Tags concepts in a random article I've read, finds the text relationship, tweets it out.
