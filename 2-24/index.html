@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+	#container{
+		margin-left: auto;
+		margin-right: auto;
+		width: 50%;
+	}
+	.img{
+		display: inline-block;
+		width: 50%;
+	}
+	span {
+		text-align: center;
+	}
+	img {
+		width: 100%;
+	}
+	</style>
+	<script type="text/javascript" src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+</head>
+<body>
+<div>
+	<div id="container">
+		<div id="buttons">
+			<button id="go">Go</button>	
+			<button id="replace">Replace</button>
+		</div>
+		<div id="imgs">
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function($) {
+		function rollover(image,src){
+			image.src = src;
+		}
+
+		document.getElementById("go").addEventListener("click", function (argument) {
+			$.ajax({
+				url: '/submit',
+				type: 'GET',
+				dataType: 'json'
+			})
+			.done(function(d) {
+				console.log(d);
+				$("#imgs").html('');
+				for (var i in d) {
+					var ig = d[i][0];
+					var flickr = d[i][1];
+
+					// console.log(ig);
+					// console.log(flickr);
+
+					var img = $('<div class="img"><img id="dynamic'+i+'"><span>'+d[i][2]+'</span></div>');
+					$("#imgs").append(img);
+
+					setupHover($("#dynamic"+i), flickr, ig);
+
+					// $("#imgs").append(img);
+					// $("#dynamic"+i).attr("src", ig);
+					// $("#dynamic"+i)
+					// 	.mouseover(flickr, function(e) {
+					// 		console.log(e);
+					// 		console.log(flickr);
+					// 		$('#dynamic').attr("src", flickr);
+					// 	})
+					// 	.mouseout(ig, function(e) {
+					// 		console.log(e);
+					// 		console.log(ig);
+					// 		$("#dynamic"+i).attr("src", ig);					
+					// 	});
+
+					// $("#imgs").append('<img src='+ig+' onmouseover="this.src="'+flickr+'"" onmouseout="this.src="'+ig+'"">');
+				}
+				console.log("success");
+			})
+			.fail(function() {
+				console.log("error");
+			})
+			.always(function() {
+				console.log("complete");
+			});
+		});
+
+		function setupHover(el, hoverIn, hoverOut) {
+			$(el).attr("src", hoverIn);
+			$(el)
+				.mouseover(function(e) {
+					// console.log(e);
+					// console.log(hoverIn);
+					$(this).attr("src", hoverIn);
+				})
+				.mouseout(function(e) {
+					// console.log(e);
+					// console.log(hoverOut);
+					$(this).attr("src", hoverOut);					
+				});
+		}				
+	});
+
+
+
+
+</script>
+</body>
+</html>
