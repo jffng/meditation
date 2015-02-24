@@ -7,7 +7,7 @@ import unirest
 import random
 import twitter
 
-creds = json.load(open('../configuration.json'))
+creds = json.load(open('/root/Thesis/meditation/configuration.json'))
 access_token_url = 'https://www.instapaper.com/api/1/oauth/access_token'
 
 consumer = oauth.Consumer(creds['instapaper_consumer_key'], creds['instapaper_consumer_secret'])
