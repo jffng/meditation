@@ -2,7 +2,7 @@ from pattern.en import parsetree
 from pattern.search import search
 import twitter, json, random
 
-creds = json.load(open('../configuration.json'))
+creds = json.load(open('/root/Thesis/meditation/configuration.json'))
 
 CONSUMER_KEY = creds["jffng_twit_key"]
 CONSUMER_SECRET = creds["jffng_twit_secret"]
@@ -44,10 +44,10 @@ for t in statuses:
 			status = status.replace('@', '')
 
 			if len(status) > 139:
-				print len(status)
+				# print len(status)
 				status = status[:139]
-			print status
+			# print status
 			qualify_user.statuses.update(status=status)
 	
-	except KeyError:
-		continue
+	except (KeyError, IndexError):
+		pass
