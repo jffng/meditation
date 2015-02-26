@@ -1,8 +1,9 @@
 from pattern.en import parsetree
 from pattern.search import search
 import twitter, json, random
+import wordfilter as wf
 
-creds = json.load(open('../configuration.json'))
+creds = json.load(open('/root/Thesis/meditation/configuration.json'))
 
 CONSUMER_KEY = creds["jffng_twit_key"]
 CONSUMER_SECRET = creds["jffng_twit_secret"]
@@ -25,29 +26,33 @@ qualify_user = twitter.Twitter(auth=qualify_auth)
 
 qualifiers = ['maybe', 'perhaps', 'supposedly', 'possibly', 'likely', 'conceivably', 'potentially']
 
+filter = wf.Wordfilter()
+
 for t in statuses:
 	try:
 		tw = t['text']
 		# print tweet
-		s = parsetree(tw, relations=True, lemmata=True)
-		matches = search('NP will|be RB?+ PP|VP|ADJP|ADVP|NP', s)
-		if matches:
-			qualifier = qualifiers[random.randint(0,len(qualifiers)-1)]
+		if filter.blacklisted(tw):
+			pass
+		else:
+			s= parsetree(tw, relations=True, lemmata=True)
+			matches = search('NP will|be RB?+ PP|VP|ADJP|ADVP|NP', s)
+			if matches:
+				qualifier = qualifiers[random.randint(0,len(qualifiers)-1)]
 
-			fragments = tw.split(matches[0].string)
-			
-			if fragments[1]:
-				status = fragments[0] + matches[0].string + ', ' + qualifier + ',' + fragments[1]
-			else:
-				status = fragments[0] + matches[0].string + ', ' + qualifier + '.'			
-			
-			status = status.replace('@', '')
+				fragments = tw.split(matches[0].string)
+				
+				if fragments[1]:
+					status = fragments[0] + matches[0].string + ', ' + qualifier + ',' + fragments[1]
+				else:
+					status = fragments[0] + matches[0].string + ', ' + qualifier + '.'			
+				
+				status = status.replace('@', '')
 
-			if len(status) > 139:
-				print len(status)
-				status = status[:139]
-			print status
-			qualify_user.statuses.update(status=status)
-	
-	except KeyError:
-		continue
+				if len(status) > 139:
+					# print len(status)
+					status = status[:139]
+				# print status
+				qualify_user.statuses.update(status=status)	
+	except (KeyError, IndexError):
+		pass
