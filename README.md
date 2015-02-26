@@ -31,3 +31,12 @@ Uses a convolutional neural network (libccv) to tag instagram images and generat
 
 ##### 2-23
 Tags concepts in a random article I've read, finds the text relationship, tweets it out.
+
+##### 2-24
+Adapts 2-17 example to use libccv instead of Alchemy's image tagger
+
+##### 2-25
+Searches my twitter timeline for declarative / fact-oriented tweets, adds qualification (e.g. "maybe", "perhaps")
+
+##### 2-26
+
