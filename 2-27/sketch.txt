@@ -1,0 +1,17 @@
+INPUT
+
+# pull instagram images
+
+TRANSFORMATION
+
+# filter by liked
+
+# tag with deep learning
+
+# compare tags to marketing / ad copy corpus, find k-nearest neighbor
+
+# search flickr for images related to the k-nearest neighbor
+
+OUTPUT
+
+# generate a 'targeted ad profile' 
