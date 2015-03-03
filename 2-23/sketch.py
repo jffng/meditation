@@ -120,11 +120,11 @@ phrase = all_phrases[index]
 ##				##
 ##################
 
-CONSUMER_KEY = creds["twit_key"]
-CONSUMER_SECRET = creds["twit_secret"]
+CONSUMER_KEY = creds["jffng_bot_twit_key"]
+CONSUMER_SECRET = creds["jffng_bot_twit_secret"]
 
-OAUTH_TOKEN = creds["twit_token"]
-OAUTH_TOKEN_SECRET = creds["twit_token_secret"]
+OAUTH_TOKEN = creds["jffng_bot_twit_token"]
+OAUTH_TOKEN_SECRET = creds["jffng_bot_twit_token_secret"]
 
 twitter_auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET,
                            CONSUMER_KEY, CONSUMER_SECRET)
