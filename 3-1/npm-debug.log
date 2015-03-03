@@ -1,0 +1,68 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'regression-js' ]
+2 info using npm@1.3.24
+3 info using node@v0.10.25
+4 verbose cache add [ 'regression-js', null ]
+5 verbose cache add name=undefined spec="regression-js" args=["regression-js",null]
+6 verbose parsed url { protocol: null,
+6 verbose parsed url   slashes: null,
+6 verbose parsed url   auth: null,
+6 verbose parsed url   host: null,
+6 verbose parsed url   port: null,
+6 verbose parsed url   hostname: null,
+6 verbose parsed url   hash: null,
+6 verbose parsed url   search: null,
+6 verbose parsed url   query: null,
+6 verbose parsed url   pathname: 'regression-js',
+6 verbose parsed url   path: 'regression-js',
+6 verbose parsed url   href: 'regression-js' }
+7 silly lockFile c2f47d88-regression-js regression-js
+8 verbose lock regression-js /Users/jonger4/.npm/c2f47d88-regression-js.lock
+9 silly lockFile c2f47d88-regression-js regression-js
+10 silly lockFile c2f47d88-regression-js regression-js
+11 verbose addNamed [ 'regression-js', '' ]
+12 verbose addNamed [ null, '*' ]
+13 silly lockFile 0a6b1a4f-regression-js regression-js@
+14 verbose lock regression-js@ /Users/jonger4/.npm/0a6b1a4f-regression-js.lock
+15 silly addNameRange { name: 'regression-js', range: '*', hasData: false }
+16 verbose url raw regression-js
+17 verbose url resolving [ 'https://registry.npmjs.org/', './regression-js' ]
+18 verbose url resolved https://registry.npmjs.org/regression-js
+19 info trying registry request attempt 1 at 18:17:52
+20 http GET https://registry.npmjs.org/regression-js
+21 http 404 https://registry.npmjs.org/regression-js
+22 silly registry.get cb [ 404,
+22 silly registry.get   { date: 'Mon, 02 Mar 2015 23:17:51 GMT',
+22 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+22 silly registry.get     etag: '"29HRC61UI381L24H3F6ILJ64X"',
+22 silly registry.get     'content-type': 'application/json',
+22 silly registry.get     'cache-control': 'max-age=0',
+22 silly registry.get     'content-length': '688',
+22 silly registry.get     'accept-ranges': 'bytes',
+22 silly registry.get     via: '1.1 varnish',
+22 silly registry.get     age: '0',
+22 silly registry.get     'x-served-by': 'cache-atl6226-ATL',
+22 silly registry.get     'x-cache': 'MISS',
+22 silly registry.get     'x-cache-hits': '0',
+22 silly registry.get     'x-timer': 'S1425338271.581768,VS0,VE77',
+22 silly registry.get     vary: 'Accept',
+22 silly registry.get     'keep-alive': 'timeout=10, max=50',
+22 silly registry.get     connection: 'Keep-Alive' } ]
+23 silly addNameRange number 2 { name: 'regression-js', range: '*', hasData: true }
+24 silly addNameRange versions [ 'regression-js', [] ]
+25 error TypeError: Cannot read property 'latest' of undefined
+25 error     at next (/usr/local/lib/node_modules/npm/lib/cache.js:692:35)
+25 error     at /usr/local/lib/node_modules/npm/lib/cache.js:680:5
+25 error     at saved (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/get.js:142:7)
+25 error     at /usr/local/lib/node_modules/npm/node_modules/graceful-fs/polyfills.js:133:7
+25 error     at Object.oncomplete (fs.js:107:15)
+26 error If you need help, you may report this *entire* log,
+26 error including the npm and node versions, at:
+26 error     <http://github.com/isaacs/npm/issues>
+27 error System Darwin 14.0.0
+28 error command "node" "/usr/local/bin/npm" "install" "regression-js"
+29 error cwd /Users/jonger4/Documents/ITP/THESIS/meditations/3-1
+30 error node -v v0.10.25
+31 error npm -v 1.3.24
+32 error type non_object_property_load
+33 verbose exit [ 1, true ]
