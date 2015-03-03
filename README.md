@@ -38,5 +38,11 @@ Adapts 2-17 example to use libccv instead of Alchemy's image tagger
 ##### 2-25
 Searches my twitter timeline for declarative / fact-oriented tweets, adds qualification (e.g. "maybe", "perhaps")
 
-##### 2-26
+##### 2-27
+Idea for generating audio stories 
 
+##### 3-1
+Database of article - concept - sentiment. Plots sentiment of articles read over the last 7 days, makes a recommendation.
+
+##### 3-2
+Checks for new articles, logs them to the db.
