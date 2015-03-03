@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from sentsql.database import Base, db_session, engine
 from sentsql.model import Concept, Bookmark
 from sqlalchemy.orm.exc import MultipleResultsFound, NoResultFound
+<<<<<<< HEAD
 from flask import Flask, Response, request, send_file, send_from_directory
 
 app = Flask(__name__, static_url_path='')
