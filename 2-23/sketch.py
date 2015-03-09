@@ -7,7 +7,8 @@ import unirest
 import random
 import twitter
 
-creds = json.load(open('/root/Thesis/meditation/configuration.json'))
+# creds = json.load(open('/root/Thesis/meditation/configuration.json'))
+creds = json.load(open('../configuration.json'))
 access_token_url = 'https://www.instapaper.com/api/1/oauth/access_token'
 
 consumer = oauth.Consumer(creds['instapaper_consumer_key'], creds['instapaper_consumer_secret'])
@@ -27,10 +28,22 @@ token = oauth.Token(request_token['oauth_token'], request_token['oauth_token_sec
 http = oauth.Client(consumer, token)
 
 response, data = http.request('https://www.instapaper.com/api/1/bookmarks/list', method='POST', body=urllib.urlencode({
-    'limit': '50'
+    'limit': '100'
 })) 
 
 bookmarks = json.loads(data)
+bookmarks = bookmarks[2:]
+
+response, data = http.request('https://www.instapaper.com/api/1/bookmarks/list', method='POST', body=urllib.urlencode({
+    'limit': '100',
+    'folder_id': 'archive'
+})) 
+
+archive = json.loads(data)
+archive = archive[2:]
+
+for a in archive:
+	bookmarks.append(a)
 
 def get_concepts(url):
 	encoded_url = urllib.quote(url, '')
@@ -92,7 +105,6 @@ all_concepts = []
 all_phrases = []
 
 index = random.randint(2,len(bookmarks) - 1)
-
 
 bookmark = bookmarks[index]['url']
 
