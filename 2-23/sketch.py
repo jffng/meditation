@@ -6,9 +6,10 @@ import urlparse
 import unirest
 import random
 import twitter
+import wordfilter as wf
 
-# creds = json.load(open('/root/Thesis/meditation/configuration.json'))
-creds = json.load(open('../configuration.json'))
+creds = json.load(open('/root/Thesis/meditation/configuration.json'))
+# creds = json.load(open('../configuration.json'))
 access_token_url = 'https://www.instapaper.com/api/1/oauth/access_token'
 
 consumer = oauth.Consumer(creds['instapaper_consumer_key'], creds['instapaper_consumer_secret'])
@@ -124,6 +125,7 @@ index = random.randint(0,len(all_phrases) - 1)
 
 phrase = all_phrases[index]
 
+filter = wf.Wordfilter()
 # print phrase
 
 ##################
@@ -147,4 +149,7 @@ tweet = phrase + ' -- ' + bookmark
 
 print tweet
 
-twit_user.statuses.update(status=tweet)
+if filter.blacklisted(phrase):
+	pass
+else:
+	twit_user.statuses.update(status=tweet)
