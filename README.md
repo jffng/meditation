@@ -46,3 +46,12 @@ Database of article - concept - sentiment. Plots sentiment of articles read over
 
 ##### 3-2
 Checks for new articles, logs them to the db.
+
+##### 3-10
+Tells a story about Vicci Ho.
+
+##### 3-11
+Tells a story about Fletcher Bach
+
+##### 3-12
+Use sentiment to glitch a photo self-portrait
