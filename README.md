@@ -55,3 +55,15 @@ Tells a story about Fletcher Bach
 
 ##### 3-12
 Use sentiment to glitch a photo self-portrait
+
+##### 3-16
+
+##### 3-17
+less than inspired attempt to quantify my own topical interests
+
+##### 3-18
+bio generator.
+
+##### FUTURE IDEAS
+- clarifai video concept tagging automatic video watcher
+- 
