@@ -64,6 +64,11 @@ less than inspired attempt to quantify my own topical interests
 ##### 3-18
 bio generator.
 
+##### 3-20
+concept analysis of my writing
+
 ##### FUTURE IDEAS
 - clarifai video concept tagging automatic video watcher
 - 
+
+
