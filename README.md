@@ -67,6 +67,9 @@ bio generator.
 ##### 3-20
 concept analysis of my writing
 
+##### 3-22
+concept map
+
 ##### FUTURE IDEAS
 - clarifai video concept tagging automatic video watcher
 - 
