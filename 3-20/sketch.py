@@ -50,4 +50,4 @@ def get_concepts(url):
 
 # print get_concepts('http://www.nytimes.com/2015/03/21/us/netanyahu-tactics-anger-many-us-jews-deepening-a-divide.html')
 
-print get_concepts('http://www.jffng.com/writings/021815.html')
+print get_concepts('http://www.jffng.com/writings/21515.html')
