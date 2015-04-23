@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.4/p5.js"></script>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.4/addons/p5.dom.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">	
+	var img, s, logo, t;
+	var canvas;
+	var ar;
+	var URL_WIDTH = 640;
+
+	function setup() {
+		canvas = createCanvas(640, 640);
+	}
+
+	function draw(){
+		if(img && s && logo){
+			drawAd();
+			drawLogo();
+		} else if (img && s && t){
+			drawAd();
+			placeCopy();
+		}
+	}
+
+	function drawLogo(){
+		ctx.drawImage(logo.elt, 0, 540, 80,80);			
+	}
+
+	function drawAd(){
+		ctx = canvas.elt.getContext("2d");
+		// ctx.globalAlpha = .8;
+		ctx.drawImage(img.elt, 0, 0);	
+
+		// AD BLOCK
+		noStroke();
+		fill(color('rgba(10,10,10,.3)'));
+		rect(0,0,640,640);
+
+		// AD COPY
+		textFont("Helvetica Neue");
+		textAlign(CENTER);
+		textStyle(BOLD);
+		textSize(42);
+		fill(color('rgba(255,255,255,.95)'));
+		text(s,320,280,640,100);
+	}
+
+	function placeCopy(){
+		// URL LINK BLOCK
+		// fill(color('rgba(255,255,255,.5)'));
+		// rect(0,570,URL_WIDTH,40);	
+
+		// URL TEXT
+		textAlign(LEFT);
+		textSize(24);
+		fill(color('rgba(255,255,255,.95)'));
+		text(t,10,600);
+	}
+
+	function theCallback(data){
+		if( data[4] ){ 
+			logo = createImg(data[4]);
+			logo.hide();
+		} else {
+			t = data[3];
+			t = t.toLowerCase();
+			URL_WIDTH = t.length * 15;			
+		}
+		img = createImg(data[0]);
+		// ar = data;
+		// console.log(data);
+		img.position(0, 0);
+		img.hide();
+		// img.size(640, 640); // Use AUTO to have the height or width auto scale. 
+
+		s = data[2];
+		s = s.toUpperCase();
+	}
+
+
+	$.ajax({
+		url: '//104.131.127.81/submit',
+			type: 'GET',
+			dataType: 'json'
+		})
+		.done(theCallback)
+		.fail(function() {
+			console.log("error");
+		})
+		.always(function() {
+			console.log("complete");
+	});
+
+</script>
+
+</body>
+</html>
