@@ -29,7 +29,7 @@
 	}
 
 	function drawLogo(){
-		ctx.drawImage(logo.elt, 0, 540, 80,80);			
+		ctx.drawImage(logo.elt, 0, 520, 120,120);			
 	}
 
 	function drawAd(){
@@ -39,7 +39,7 @@
 
 		// AD BLOCK
 		noStroke();
-		fill(color('rgba(10,10,10,.3)'));
+		fill(color('rgba(10,10,10,.2)'));
 		rect(0,0,640,640);
 
 		// AD COPY
@@ -48,7 +48,7 @@
 		textStyle(BOLD);
 		textSize(42);
 		fill(color('rgba(255,255,255,.95)'));
-		text(s,320,280,640,100);
+		text(s,320,280,640,120);
 	}
 
 	function placeCopy(){
@@ -64,12 +64,14 @@
 	}
 
 	function theCallback(data){
+		console.log(data);
 		if( data[4] ){ 
 			logo = createImg(data[4]);
 			logo.hide();
 		} else {
 			t = data[3];
 			t = t.toLowerCase();
+			t = t + '.com';
 			URL_WIDTH = t.length * 15;			
 		}
 		img = createImg(data[0]);
