@@ -9,7 +9,6 @@ import twitter
 import wordfilter as wf
 
 creds = json.load(open('/root/Thesis/meditation/configuration.json'))
-# creds = json.load(open('../configuration.json'))
 access_token_url = 'https://www.instapaper.com/api/1/oauth/access_token'
 
 consumer = oauth.Consumer(creds['instapaper_consumer_key'], creds['instapaper_consumer_secret'])
@@ -55,7 +54,7 @@ def get_concepts(url):
 		},
 		params={
 			'url': encoded_url,
-			'apikey': creds['alchemy_key'],
+			'apikey': creds['alchemy_key_2'],
 			'maxRetrieve': 20,
 			'outputMode': 'json'
 		}
@@ -71,7 +70,7 @@ def get_concepts(url):
 
 def concept_net(tag):
 	encoded_tag = urllib.quote(tag.lower(), '')
-	uri = 'http://conceptnet5.media.mit.edu/data/5.3/c/en/' + encoded_tag
+	uri = 'http://conceptnet5.media.mit.edu/data/5.4/c/en/' + encoded_tag
 
 	limit = 10
 
@@ -91,13 +90,23 @@ def concept_net(tag):
 	if edges:
 		for e in edges:
 			if e['surfaceText']:
-				surfaceTexts.append(e['surfaceText'])
-		for text in surfaceTexts:
-			a = text.replace('[','')
+                                temp = {}
+                                temp['start'] = e['surfaceStart'].replace(' ', '')
+                                temp['end'] = e['surfaceEnd'].replace(' ', '')
+                                temp['text'] = e['surfaceText']
+                                surfaceTexts.append(temp)
+				#surfaceTexts.append(e['surfaceText'])
+		for t in surfaceTexts:
+			a = t['text'].replace('[','')
 			b = a.replace(']','')
-			cleanedTexts.append(b)
-			# print b
-	# else:
+			t['text'] = b
+			ht = '#' + t['start']
+                        t['text'] = ht.join(t['text'].rsplit(t['start'], 1))
+                        ht = '#' + t['end']
+                        t['text'] = ht.join(t['text'].rsplit(t['end'], 1))
+	                cleanedTexts.append(t['text'])
+                        #print t['text']
+        # else:
 	# 	print response.body
 
 	return cleanedTexts
@@ -117,16 +126,17 @@ for c in all_concepts:
 	temp_phrases = concept_net(c)
 	if temp_phrases:
 		for t in temp_phrases:
-			all_phrases.append(t)
+                        if t.find('#') != -1:
+			        all_phrases.append(t)
 
 # print all_phrases
 
 index = random.randint(0,len(all_phrases) - 1)
 
 phrase = all_phrases[index]
+#print phrase
 
 filter = wf.Wordfilter()
-# print phrase
 
 ##################
 ##				##
@@ -141,15 +151,14 @@ OAUTH_TOKEN = creds["jffng_bot_twit_token"]
 OAUTH_TOKEN_SECRET = creds["jffng_bot_twit_token_secret"]
 
 twitter_auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET,
-                           CONSUMER_KEY, CONSUMER_SECRET)
+                          CONSUMER_KEY, CONSUMER_SECRET)
 
 twit_user = twitter.Twitter(auth=twitter_auth)
 
 tweet = phrase + ' -- ' + bookmark
 
-print tweet
-
 if filter.blacklisted(phrase):
 	pass
 else:
-	twit_user.statuses.update(status=tweet)
+        print tweet
+        twit_user.statuses.update(status=tweet)
